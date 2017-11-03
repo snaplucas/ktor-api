@@ -1,5 +1,6 @@
 package api
 
+import api.application.ProductService
 import api.data.ProductRepository
 import api.data.Products
 import api.routes.index
@@ -38,6 +39,6 @@ fun Application.main() {
     }
     routing {
         index()
-        products(ProductRepository())
+        products(ProductService(ProductRepository()))
     }
 }
