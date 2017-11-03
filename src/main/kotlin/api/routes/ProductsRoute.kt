@@ -2,21 +2,17 @@ package api.routes
 
 import api.ProductsRoute
 import api.data.ProductRepository
-import api.data.Products
 import api.domain.model.Product
-import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.ktor.locations.get
 import org.jetbrains.ktor.locations.post
 import org.jetbrains.ktor.request.receive
-import org.jetbrains.ktor.response.header
 import org.jetbrains.ktor.response.respond
 import org.jetbrains.ktor.routing.Route
 
 fun Route.products(productRepository: ProductRepository) {
     get<ProductsRoute> {
-        call.response.header("Access-Control-Allow-Origin", "*")
-        val products = getProductList(productRepository)
+        val products = getAllProducts(productRepository)
         call.respond(products)
     }
 
@@ -28,16 +24,12 @@ fun Route.products(productRepository: ProductRepository) {
 
 suspend fun saveProduct(productRepository: ProductRepository, product: Product): Product {
     return transaction {
-        create(Products)
         productRepository.insert(product)
     }
 }
 
-suspend fun getProductList(productRepository: ProductRepository) {
+suspend fun getAllProducts(productRepository: ProductRepository): List<Product> {
     return transaction {
-        create(Products)
-        productRepository.insert(Product(1, "carro", 5000))
         productRepository.selectAll()
     }
 }
-

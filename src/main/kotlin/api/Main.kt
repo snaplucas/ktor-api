@@ -1,9 +1,12 @@
 package api
 
 import api.data.ProductRepository
+import api.data.Products
 import api.routes.index
 import api.routes.products
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.ktor.application.Application
 import org.jetbrains.ktor.application.install
 import org.jetbrains.ktor.features.CallLogging
@@ -20,7 +23,10 @@ fun main(args: Array<String>) {
 }
 
 private fun initDataBase() {
-    Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver")
+    Database.connect("jdbc:h2:~/test", driver = "org.h2.Driver")
+    transaction {
+        SchemaUtils.create(Products)
+    }
 }
 
 fun Application.main() {
