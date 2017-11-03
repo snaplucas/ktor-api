@@ -1,7 +1,9 @@
 package api
 
+import api.data.ProductRepository
 import api.routes.index
 import api.routes.products
+import org.jetbrains.exposed.sql.Database
 import org.jetbrains.ktor.application.Application
 import org.jetbrains.ktor.application.install
 import org.jetbrains.ktor.features.CallLogging
@@ -13,7 +15,12 @@ import org.jetbrains.ktor.locations.Locations
 import org.jetbrains.ktor.routing.routing
 
 fun main(args: Array<String>) {
+    initDataBase()
     embeddedServer(Jetty, 8080, module = Application::main).start()
+}
+
+private fun initDataBase() {
+    Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver")
 }
 
 fun Application.main() {
@@ -25,6 +32,6 @@ fun Application.main() {
     }
     routing {
         index()
-        products()
+        products(ProductRepository())
     }
 }
