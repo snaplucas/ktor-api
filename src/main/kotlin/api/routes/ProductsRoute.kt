@@ -2,6 +2,7 @@ package api.routes
 
 import api.ProductsRoute
 import api.application.ProductService
+import org.eclipse.jetty.http.HttpStatus
 import org.jetbrains.ktor.locations.get
 import org.jetbrains.ktor.locations.post
 import org.jetbrains.ktor.request.receive
@@ -16,7 +17,7 @@ fun Route.products(productService: ProductService) {
     }
 
     post<ProductsRoute> {
-        val product = productService.saveProduct(call.receive())
-        call.respond(product)
+        productService.saveProduct(call.receive())
+        call.respond(HttpStatus.OK_200)
     }
 }
