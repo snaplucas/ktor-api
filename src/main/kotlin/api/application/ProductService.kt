@@ -10,9 +10,5 @@ class ProductService(private val productRepository: ProductRepository) {
 
     suspend fun findById(id: Int) = transaction { productRepository.findById(id) }
 
-    suspend fun saveProduct(product: Product): Product {
-        return transaction {
-            productRepository.insert(product)
-        }
-    }
+    suspend fun saveProduct(product: Product): Product = transaction { productRepository.insert(product) }
 }
