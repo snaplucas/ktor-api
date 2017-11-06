@@ -10,6 +10,5 @@ class SetupDataBase {
         transaction {
             SchemaUtils.create(Products)
         }
-
     }
 }

@@ -1,6 +1,6 @@
 package api.routes
 
-import api.ProductsRoute
+import api.server.ProductsRoute
 import api.application.ProductService
 import api.exceptions.CustomException
 import org.eclipse.jetty.http.HttpStatus
@@ -26,7 +26,7 @@ fun Route.products(productService: ProductService) {
         call.respond(product ?: HttpStatus.NOT_FOUND_404)
     }
 
-    get("exception"){
+    get("/exception"){
         throw CustomException()
     }
 

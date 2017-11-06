@@ -19,7 +19,6 @@ class ProductRepository {
 
     private fun byId(id: Int): Op<Boolean> = Products.id eq id
 
-
     fun insert(product: Product): Product {
         product.id = Products.insert({
             it[name] = product.name

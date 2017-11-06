@@ -30,7 +30,6 @@ fun startServer() = embeddedServer(Jetty, 8080) {
                 is CustomException -> it.status
                 else -> HttpStatusCode.InternalServerError
             }
-            it.stackTrace.forEach(::println)
             call.response.status(status)
             call.respond(it)
         }

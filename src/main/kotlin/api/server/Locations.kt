@@ -1,4 +1,4 @@
-package api
+package api.server
 
 import org.jetbrains.ktor.locations.location
 
