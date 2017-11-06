@@ -2,6 +2,7 @@ package api.routes
 
 import api.ProductsRoute
 import api.application.ProductService
+import api.exceptions.CustomException
 import org.eclipse.jetty.http.HttpStatus
 import org.jetbrains.ktor.locations.post
 import org.jetbrains.ktor.request.receive
@@ -23,6 +24,10 @@ fun Route.products(productService: ProductService) {
         }
         val product = id?.let { x -> productService.findById(x) }
         call.respond(product ?: HttpStatus.NOT_FOUND_404)
+    }
+
+    get("exception"){
+        throw CustomException()
     }
 
     post<ProductsRoute> {
