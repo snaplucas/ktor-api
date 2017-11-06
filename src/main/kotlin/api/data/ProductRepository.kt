@@ -1,20 +1,24 @@
 package api.data
 
 import api.domain.model.Product
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class ProductRepository {
 
-    fun findAll() = Products.selectAll().map { x -> mapToProduct(x) }
+    fun findAll() = Products.selectAll().map { x -> x.toProduct() }
 
-    fun findById(id: Int): Product? = Products.select { Products.id.eq(id) }
-            .map { x -> mapToProduct(x) }
-            .firstOrNull()
+    fun findById(id: Int): Product = findProduct(byId(id))
 
-    private fun mapToProduct(x: ResultRow) = Product(x[Products.id], x[Products.name], x[Products.price])
+    private fun findProduct(where: Op<Boolean>) = transaction {
+        Products.select(where)
+                .checkNull()
+                .let(ResultRow::toProduct)
+    }
+
+    private fun byId(id: Int): Op<Boolean> = Products.id eq id
+
 
     fun insert(product: Product): Product {
         product.id = Products.insert({
@@ -23,4 +27,7 @@ class ProductRepository {
         }) get Products.id
         return product
     }
+
+    private fun Query.checkNull(): ResultRow = firstOrNull() ?: throw Exception("Product not found")
+
 }
