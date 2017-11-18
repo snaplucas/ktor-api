@@ -3,37 +3,35 @@ package api.application
 import kotlinx.coroutines.experimental.*
 
 fun main(args: Array<String>) = runBlocking(CommonPool) {
-    //(1)
     val job = launch(CommonPool) {
-        sendEmailSuspending() //(2)
+        sendEmailSuspending()
         println("Email sent successfully.")
     }
-    job.join() //(9)
+    job.join()
     println("Finished")
 }
 
 suspend fun sendEmailSuspending(): Boolean {
     val msg = async(CommonPool) {
-        //(3)
         delay(500)
         "The message content"
     }
     val recipient = async(CommonPool) {
-        getReceiverAddressFromDatabase()  //(5)
+        getReceiverAddressFromDatabase()
     }
     println("Waiting for email data")
     val sendStatus = async(CommonPool) {
-        sendEmail(recipient.await(), msg.await()) //(7)
+        sendEmail(recipient.await(), msg.await())
     }
-    return sendStatus.await() //(8)
+    return sendStatus.await()
 }
 
-suspend fun getReceiverAddressFromDatabase(): String { //(4)
+suspend fun getReceiverAddressFromDatabase(): String {
     delay(1000)
     return "coroutine@kotlin.org"
 }
 
-suspend fun sendEmail(r: String, msg: String): Boolean { //(6)
+suspend fun sendEmail(r: String, msg: String): Boolean {
     delay(2000)
     println("Sent '$msg' to $r")
     return true
