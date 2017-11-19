@@ -36,7 +36,3 @@ suspend fun sendEmail(r: String, msg: String): Boolean {
     println("Sent '$msg' to $r")
     return true
 }
-
-
-
-
