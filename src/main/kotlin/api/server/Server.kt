@@ -1,11 +1,7 @@
 package api.server
 
-import api.application.ProductService
-import api.data.ProductRepository
 import api.data.SetupDataBase
 import api.exceptions.CustomException
-import api.routes.index
-import api.routes.products
 import org.jetbrains.ktor.application.install
 import org.jetbrains.ktor.features.CORS
 import org.jetbrains.ktor.features.CallLogging
@@ -17,7 +13,7 @@ import org.jetbrains.ktor.http.HttpStatusCode
 import org.jetbrains.ktor.jetty.Jetty
 import org.jetbrains.ktor.locations.Locations
 import org.jetbrains.ktor.response.respond
-import org.jetbrains.ktor.routing.routing
+import org.jetbrains.ktor.routing.Routing
 
 fun startServer() = embeddedServer(Jetty, 8080) {
     SetupDataBase()
@@ -37,12 +33,9 @@ fun startServer() = embeddedServer(Jetty, 8080) {
             call.response.status(status)
             call.respond(it)
         }
-
-        routing {
-            index()
-            products(ProductService(ProductRepository()))
-        }
     }
-
+    install(Routing) {
+        setup()
+    }
 
 }.start(wait = true)
