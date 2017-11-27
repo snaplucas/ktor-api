@@ -7,9 +7,9 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class ProductRepository {
 
-    fun findAll() = Products.selectAll().map { x -> x.toProduct() }
+    fun findAll() = transaction { Products.selectAll().map { x -> x.toProduct() } }
 
-    fun findById(id: Int): Product = findProduct(byId(id))
+    fun findById(id: Int): Product = transaction { findProduct(byId(id)) }
 
     private fun findProduct(where: Op<Boolean>) = transaction {
         Products.select(where)
@@ -17,7 +17,7 @@ class ProductRepository {
                 .let(ResultRow::toProduct)
     }
 
-    private fun byId(id: Int): Op<Boolean> = Products.id eq id
+    private fun byId(id: Int): Op<Boolean> = transaction { Products.id eq id }
 
     fun insert(product: Product): Product {
         product.id = Products.insert({
