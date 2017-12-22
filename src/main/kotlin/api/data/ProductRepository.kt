@@ -1,5 +1,6 @@
 package api.data
 
+import api.application.IProductRepository
 import api.domain.model.Product
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq

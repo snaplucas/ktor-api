@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class SetupDataBase {
     init {
-        Database.connect("jdbc:h2:~/test", driver = "org.h2.Driver")
+        Database.connect("jdbc:h2:~/home/CIT/lucasbr/Documents", driver = "org.h2.Driver")
         transaction {
             SchemaUtils.create(Products)
         }

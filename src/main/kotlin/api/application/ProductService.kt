@@ -1,9 +1,8 @@
 package api.application
 
-import api.data.ProductRepository
 import api.domain.model.Product
 
-class ProductService(private val productRepository: ProductRepository) : IProductService {
+class ProductService(private val productRepository: IProductRepository) : IProductService {
 
     override suspend fun findAll(): List<Product> = productRepository.findAll()
 

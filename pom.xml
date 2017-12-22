@@ -84,6 +84,18 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.koin</groupId>
+            <artifactId>koin-core</artifactId>
+            <version>0.7.1</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.koin</groupId>
+            <artifactId>koin-ktor</artifactId>
+            <version>0.7.1</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
 
     <build>

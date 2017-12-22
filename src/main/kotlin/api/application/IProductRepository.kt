@@ -1,4 +1,4 @@
-package api.data
+package api.application
 
 import api.domain.model.Product
 

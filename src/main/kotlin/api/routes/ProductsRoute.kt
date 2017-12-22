@@ -1,8 +1,8 @@
 package api.routes
 
-import api.server.ProductsRoute
-import api.application.ProductService
+import api.application.IProductService
 import api.exceptions.CustomException
+import api.server.ProductsRoute
 import org.eclipse.jetty.http.HttpStatus
 import org.jetbrains.ktor.locations.post
 import org.jetbrains.ktor.request.receive
@@ -10,7 +10,7 @@ import org.jetbrains.ktor.response.respond
 import org.jetbrains.ktor.routing.Route
 import org.jetbrains.ktor.routing.get
 
-fun Route.products(productService: ProductService) {
+fun Route.products(productService: IProductService) {
 
     get("/products") {
         call.respond(productService.findAll())
@@ -26,7 +26,7 @@ fun Route.products(productService: ProductService) {
         call.respond(product ?: HttpStatus.NOT_FOUND_404)
     }
 
-    get("/exception"){
+    get("/exception") {
         throw CustomException()
     }
 

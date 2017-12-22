@@ -13,6 +13,7 @@ import org.jetbrains.ktor.locations.Locations
 import org.jetbrains.ktor.routing.Routing
 
 fun startServer() = embeddedServer(Jetty, 8080) {
+
     SetupDataBase()
     install(DefaultHeaders)
     install(CORS)
