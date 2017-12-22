@@ -3,11 +3,11 @@ package api.application
 import api.data.ProductRepository
 import api.domain.model.Product
 
-class ProductService(private val productRepository: ProductRepository) {
+class ProductService(private val productRepository: ProductRepository) : IProductService {
 
-    suspend fun findAll(): List<Product> = productRepository.findAll()
+    override suspend fun findAll(): List<Product> = productRepository.findAll()
 
-    suspend fun findById(id: Int) = productRepository.findById(id)
+    override suspend fun findById(id: Int) = productRepository.findById(id)
 
-    suspend fun saveProduct(product: Product): Product = productRepository.insert(product)
+    override suspend fun saveProduct(product: Product): Product = productRepository.insert(product)
 }
