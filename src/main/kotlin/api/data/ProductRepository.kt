@@ -20,12 +20,11 @@ class ProductRepository : IProductRepository {
 
     private fun byId(id: Int): Op<Boolean> = transaction { Products.id eq id }
 
-    override fun insert(product: Product): Product {
+    override fun insert(product: Product) = transaction {
         product.id = Products.insert({
             it[name] = product.name
             it[price] = product.price
         }) get Products.id
-        return product
     }
 
     private fun Query.checkNull(): ResultRow = firstOrNull() ?: throw Exception("Product not found")

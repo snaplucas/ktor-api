@@ -8,5 +8,5 @@ class ProductService(private val productRepository: IProductRepository) : IProdu
 
     override suspend fun findById(id: Int) = productRepository.findById(id)
 
-    override suspend fun saveProduct(product: Product): Product = productRepository.insert(product)
+    override suspend fun saveProduct(product: Product) = productRepository.insert(product)
 }

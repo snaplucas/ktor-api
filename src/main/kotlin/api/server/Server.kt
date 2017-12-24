@@ -8,11 +8,11 @@ import org.jetbrains.ktor.features.DefaultHeaders
 import org.jetbrains.ktor.features.StatusPages
 import org.jetbrains.ktor.gson.GsonSupport
 import org.jetbrains.ktor.host.embeddedServer
-import org.jetbrains.ktor.jetty.Jetty
 import org.jetbrains.ktor.locations.Locations
+import org.jetbrains.ktor.netty.Netty
 import org.jetbrains.ktor.routing.Routing
 
-fun startServer() = embeddedServer(Jetty, 8080) {
+fun startServer() = embeddedServer(Netty, 8080) {
 
     SetupDataBase()
     install(DefaultHeaders)
