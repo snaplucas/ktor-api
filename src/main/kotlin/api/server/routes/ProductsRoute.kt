@@ -1,7 +1,7 @@
-package api.routes
+package api.server.routes
 
 import api.application.IProductService
-import api.exceptions.CustomException
+import api.application.exceptions.CustomException
 import api.server.ProductsRoute
 import org.eclipse.jetty.http.HttpStatus
 import org.jetbrains.ktor.locations.post

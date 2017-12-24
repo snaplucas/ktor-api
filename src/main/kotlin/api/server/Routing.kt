@@ -1,8 +1,8 @@
 package api.server
 
 import api.FactoryConfiguration
-import api.routes.index
-import api.routes.products
+import api.server.routes.index
+import api.server.routes.products
 import org.jetbrains.ktor.routing.Routing
 import org.jetbrains.ktor.routing.route
 

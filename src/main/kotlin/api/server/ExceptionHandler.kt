@@ -1,6 +1,6 @@
 package api.server
 
-import api.exceptions.CustomException
+import api.application.exceptions.CustomException
 import org.jetbrains.ktor.features.StatusPages
 import org.jetbrains.ktor.http.HttpStatusCode
 import org.jetbrains.ktor.response.respond

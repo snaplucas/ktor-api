@@ -1,4 +1,4 @@
-package api.exceptions
+package api.application.exceptions
 
 import org.jetbrains.ktor.http.HttpStatusCode
 
