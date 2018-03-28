@@ -12,7 +12,7 @@ import org.jetbrains.ktor.locations.Locations
 import org.jetbrains.ktor.netty.Netty
 import org.jetbrains.ktor.routing.Routing
 
-fun startServer() = embeddedServer(Netty, 8080) {
+fun startServer() = embeddedServer(Netty, watchPaths = listOf("/"), port = 8080) {
 
     SetupDataBase()
     install(DefaultHeaders)
