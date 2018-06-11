@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-         <kotlin.version>1.2.0</kotlin.version>
+        <kotlin.version>1.2.0</kotlin.version>
         <ktor.version>0.4.0-alpha-14</ktor.version>
     </properties>
 
@@ -140,7 +140,9 @@
                     <execution>
                         <id>make-assembly</id>
                         <phase>package</phase>
-                        <goals> <goal>single</goal> </goals>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                         <configuration>
                             <archive>
                                 <manifest>
